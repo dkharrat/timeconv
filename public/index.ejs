@@ -1,6 +1,6 @@
 <div class="row text-center" id="cur-unix-time-container">
   <h2 class="cur-unix-time-caption">Current Unix Time</h2>
-  <div id="cur-unix-time" class="center-block">
+  <div id="cur-unix-time" class="center-block" v-attr="data-clipboard-text: unixTime" v-text="unixTime" v-on="mouseenter: stop, mouseleave: start">
     1416553962
   </div>
 </div>

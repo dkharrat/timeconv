@@ -9,7 +9,7 @@ var rename = require('gulp-rename');
 var browserify = require('browserify');
 var transform = require('vinyl-transform');
 
-gulp.task('serve', ['dist-fonts'], function () {
+gulp.task('serve', ['dist-assets'], function () {
   harp.server(__dirname, {
     port: 9000
   });
@@ -40,10 +40,12 @@ gulp.task('build', function (done) {
     .on('close', done)
 });
 
-// Copies fonts
-gulp.task('dist-fonts', function() {
-  return gulp.src('node_modules/bootstrap/fonts/*')
+// Copies assets
+gulp.task('dist-assets', function() {
+  gulp.src('node_modules/bootstrap/fonts/*')
     .pipe(gulp.dest('public/fonts'))
+  gulp.src('node_modules/zeroclipboard/dist/ZeroClipboard.swf')
+    .pipe(gulp.dest('public/js'))
 })
 
 gulp.task('browserify', function () {
