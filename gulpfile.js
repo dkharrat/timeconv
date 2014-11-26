@@ -1,5 +1,6 @@
 var gulp = require('gulp');
 var harp = require('harp');
+var cp = require('child_process');
 
 var jshint = require('gulp-jshint');
 var less = require('gulp-less');
@@ -9,7 +10,7 @@ var rename = require('gulp-rename');
 var browserify = require('browserify');
 var transform = require('vinyl-transform');
 
-gulp.task('serve', ['dist-assets'], function () {
+gulp.task('serve', ['build', 'watch'], function () {
   harp.server(__dirname, {
     port: 9000
   });
@@ -35,13 +36,16 @@ gulp.task('watch', function() {
   gulp.watch('app/styles/*.less', ['less']);
 });
 
-gulp.task('build', function (done) {
+gulp.task('dist', ['build'], function (done) {
   cp.exec('harp compile . dist', {stdio: 'inherit'})
     .on('close', done)
 });
 
+gulp.task('build', ['copy-assets', 'lint', 'less', 'browserify'], function() {
+});
+
 // Copies assets
-gulp.task('dist-assets', function() {
+gulp.task('copy-assets', function() {
   gulp.src('node_modules/bootstrap/fonts/*')
     .pipe(gulp.dest('public/fonts'))
   gulp.src('node_modules/zeroclipboard/dist/ZeroClipboard.swf')
@@ -60,6 +64,6 @@ gulp.task('browserify', function () {
 });
 
 // Default Task
-gulp.task('default', ['lint', 'less', 'browserify', 'watch', 'serve']);
+gulp.task('default', ['serve']);
 
 

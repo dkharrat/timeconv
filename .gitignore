@@ -4,8 +4,8 @@ node_modules
 # Bower
 bower_components
 
-# Harp.js
-www
+# Build
+dist
 
 # vim
 *.swp
