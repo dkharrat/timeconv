@@ -1,0 +1,48 @@
+<div class="row text-center" id="cur-unix-time-container">
+  <h2 class="cur-unix-time-caption">Current Unix Time</h2>
+  <div id="cur-unix-time" class="center-block">
+    1416553962
+  </div>
+</div>
+
+<div>
+  <h2>Unix Time Converter</h2>
+  <form class="form-horizontal" role="form" id="unix-time-converter-form">
+    <div class="form-group">
+      <label for="date-text" class="col-sm-2 control-label">Free-form date</label>
+      <div class="col-sm-3">
+        <input class="form-control" id="date-text" type="text" v-model="dateText" v-on="keyup: this.setUnixTimeFromString(this.dateText)" />
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="unix-timestamp" class="col-sm-2 control-label">Unix time</label>
+      <div class="col-sm-3">
+        <div class="input-group">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="button" v-on="click: refreshUnixTime"><span class="glyphicon glyphicon-refresh"></span></button>
+          </span>
+          <input class="form-control" id="unix-timestamp" v-model="unixTime" />
+          <span class="input-group-addon">sec</span>
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="unix-to-utc-time" class="col-sm-2 control-label">UTC</label>
+      <div class="col-sm-3">
+        <p class="form-control-static" id="unix-to-utc-time">{{utcTime}}</p>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="unix-to-local-time" class="col-sm-2 control-label">Your local time</label>
+      <div class="col-sm-4">
+        <p class="form-control-static" id="unix-to-local-time">{{localTime}}</p>
+      </div>
+    </div>
+  </form>
+
+  <h2>What is a Unix/Epoch Time?</h2>
+  Unix time (a.k.a. POSIX time or Epoch time) is a system for describing instants in time, defined as the number
+  of seconds that have elapsed since 00:00:00 Coordinated Universal Time (UTC), Thursday, 1 January 1970, not
+  counting leap seconds. (source: <a href="http://http://en.wikipedia.org/wiki/Unix_time">Wikipedia</a>).
+</div>
+
