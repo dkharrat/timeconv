@@ -31,10 +31,10 @@ var UnixTimeClock = (function() {
     };
 
     this.refresh = function() {
-      self.elem.innerHTML = UnixTime.now()
-    }
+      self.elem.innerHTML = UnixTime.now();
+    };
     this.start();
-  }
+  };
   return constructor;
 }());
 
@@ -57,7 +57,7 @@ $(function() {
     },
     methods: {
       setUnixTimeFromString: function (e) {
-        this.unixTime = UnixTime.fromDate(Moment(e).toDate());
+        this.unixTime = UnixTime.fromDate(new Date(e));
       },
       refreshUnixTime: function (e) {
         this.unixTime = UnixTime.now();

@@ -17,22 +17,22 @@ gulp.task('serve', ['dist-fonts'], function () {
 
 // Lint Task
 gulp.task('lint', function() {
-  return gulp.src('app/assets/js/*.js')
+  return gulp.src('app/js/*.js')
     .pipe(jshint())
     .pipe(jshint.reporter('default'));
 });
 
 // Compile less task
 gulp.task('less', function() {
-  return gulp.src('app/assets/styles/*.less')
+  return gulp.src('app/styles/*.less')
     .pipe(less())
   . pipe(gulp.dest('public/css'));
 });
 
 // Watch Files For Changes
 gulp.task('watch', function() {
-  gulp.watch('app/assets/js/*.js', ['lint', 'browserify']);
-  gulp.watch('app/assets/styles/*.less', ['less']);
+  gulp.watch('app/js/*.js', ['lint', 'browserify']);
+  gulp.watch('app/styles/*.less', ['less']);
 });
 
 gulp.task('build', function (done) {
@@ -51,7 +51,7 @@ gulp.task('browserify', function () {
     var b = browserify(filename);
     return b.bundle();
   });
-  return gulp.src(['./app/assets/js/*.js'])
+  return gulp.src(['./app/js/*.js'])
   .pipe(browserified)
   //.pipe(uglify())
   .pipe(gulp.dest('./public/js'));
