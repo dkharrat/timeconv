@@ -1,42 +1,8 @@
 var $ = require('jquery');
 var Moment = require('moment');
 var Vue = require('vue');
-
-var UnixTime = (function() {
-  var methods = {
-    fromDate: function(date) {
-      return Math.round(date.getTime()/1000);
-    },
-    now: function() {
-      return this.fromDate(new Date());
-    }
-  };
-  return methods;
-}());
-
-var UnixTimeClock = (function() {
-  var constructor = function (_elem) {
-    var self = this;
-    var unixTimeUpdater;
-    this.elem = _elem;
-
-    this.start = function() {
-      this.stop();
-      this.refresh();
-      unixTimeUpdater = setInterval(this.refresh, 1000);
-    };
-
-    this.stop = function() {
-      clearInterval(unixTimeUpdater);
-    };
-
-    this.refresh = function() {
-      self.elem.innerHTML = UnixTime.now();
-    };
-    this.start();
-  };
-  return constructor;
-}());
+var UnixTime = require('./unixTime');
+var UnixTimeClock = require('./unixTimeClock');
 
 var unixTimeClock = new UnixTimeClock(document.getElementById("cur-unix-time"));
 
