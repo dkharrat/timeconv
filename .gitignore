@@ -6,3 +6,6 @@ bower_components
 
 # Harp.js
 www
+
+# vim
+.swp
