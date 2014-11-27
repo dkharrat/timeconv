@@ -35,16 +35,23 @@ var init = function(elem) {
         $htmlBridge = $('#global-zeroclipboard-html-bridge');
         $htmlBridge.tooltip({
           title:      'Click to copy',
+          animation:  false,
           placement:  'bottom',
           trigger:    'manual'
         });
 
+        var showTooltipWithTitle = function(title) {
+          return $htmlBridge.attr('title', title)
+                            .tooltip('fixTitle')
+                            .tooltip('show');
+        };
+
         clip.on('aftercopy', function(client, args){
-          $htmlBridge.attr('title', 'Copied!').tooltip('fixTitle').tooltip('show');
+          showTooltipWithTitle('Copied!');
         });
 
         $htmlBridge.on('mouseover', function() {
-          $(this).attr('title', 'Click to copy').tooltip('fixTitle').tooltip('show');
+          showTooltipWithTitle('Click to copy');
         });
 
         $htmlBridge.on('mouseleave', function() {
