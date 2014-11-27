@@ -10,12 +10,6 @@ var rename = require('gulp-rename');
 var browserify = require('browserify');
 var transform = require('vinyl-transform');
 
-gulp.task('serve', ['build', 'watch'], function () {
-  harp.server(__dirname, {
-    port: 9000
-  });
-});
-
 // Lint Task
 gulp.task('lint', function() {
   return gulp.src('app/js/*.js')
@@ -25,9 +19,9 @@ gulp.task('lint', function() {
 
 // Compile less task
 gulp.task('less', function() {
-  return gulp.src('app/styles/*.less')
+  return gulp.src('app/styles/main.less')
     .pipe(less())
-  . pipe(gulp.dest('public/css'));
+    .pipe(gulp.dest('public/css'));
 });
 
 // Watch Files For Changes
@@ -36,13 +30,6 @@ gulp.task('watch', function() {
   gulp.watch('app/styles/*.less', ['less']);
 });
 
-gulp.task('dist', ['build'], function (done) {
-  cp.exec('harp compile . dist', {stdio: 'inherit'})
-    .on('close', done)
-});
-
-gulp.task('build', ['copy-assets', 'lint', 'less', 'browserify'], function() {
-});
 
 // Copies assets
 gulp.task('copy-assets', function() {
@@ -57,13 +44,24 @@ gulp.task('browserify', function () {
     var b = browserify(filename);
     return b.bundle();
   });
-  return gulp.src(['./app/js/*.js'])
+  return gulp.src(['./app/js/index.js'])
   .pipe(browserified)
-  //.pipe(uglify())
+  .pipe(uglify())
   .pipe(gulp.dest('./public/js'));
+});
+
+gulp.task('build', ['copy-assets', 'lint', 'less', 'browserify']);
+
+gulp.task('serve', ['build', 'watch'], function () {
+  harp.server(__dirname, {
+    port: 9000
+  });
+});
+
+gulp.task('dist', ['build'], function (done) {
+  cp.exec('harp compile . dist', {stdio: 'inherit'})
+    .on('close', done)
 });
 
 // Default Task
 gulp.task('default', ['serve']);
-
-
