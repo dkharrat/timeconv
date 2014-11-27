@@ -36,16 +36,15 @@ var init = function(elem) {
         $htmlBridge.tooltip({
           title:      'Click to copy',
           placement:  'bottom',
-          trigger: 'manual',
-          container: 'body'
+          trigger:    'manual'
         });
 
         clip.on('aftercopy', function(client, args){
-          $htmlBridge.tooltip('hide');
+          $htmlBridge.attr('title', 'Copied!').tooltip('fixTitle').tooltip('show');
         });
 
         $htmlBridge.on('mouseover', function() {
-          $(this).tooltip('show');
+          $(this).attr('title', 'Click to copy').tooltip('fixTitle').tooltip('show');
         });
 
         $htmlBridge.on('mouseleave', function() {
