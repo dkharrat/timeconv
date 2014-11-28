@@ -46,7 +46,7 @@ gulp.task('browserify', function () {
   });
   return gulp.src(['./app/js/index.js'])
   .pipe(browserified)
-  .pipe(uglify())
+  //.pipe(uglify())
   .pipe(gulp.dest('./public/js'));
 });
 
