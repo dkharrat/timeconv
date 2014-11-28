@@ -74,6 +74,79 @@
     </div>
   </form>
 
+  <h2>Date Calculator</h2>
+  <h4>Add/Subtract time period</h4>
+  <form class="form" role="form" id="date-calculator-form">
+    <div class="row">
+      <div class="checkbox col-md-1">
+        Start Date
+      </div>
+      <div class="col-md-3">
+        <label for="start-date" class="sr-only">Start Date</label>
+        <div class="input-group" id="start-date-picker">
+          <input class="form-control" id="start-date" type="text" data-date-format="YYYY/MM/DD hh:mm a" v-model="startDate" />
+          <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-1 col-md-offset-1 vcenter">
+        <label for="date-op" class="sr-only">Operation</label>
+        <select class="form-control input-lg" v-model="op">
+          <option value="+">+</option>
+          <option value="-">-</option>
+        </select>
+      </div>
+      <div class="col-xs-2 vcenter">
+        <div class="row">
+          <div class="col-md-12">
+            <label for="years" class="sr-only">Years</label>
+            <input class="form-control inline-control date-component" id="years" type="text" v-model="years" /> years
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <label for="months" class="sr-only">Months</label>
+            <input class="form-control inline-control date-component" id="months" type="text" v-model="months" /> months
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <label for="weeks" class="sr-only">Weeks</label>
+            <input class="form-control inline-control date-component" id="weeks" type="text" v-model="weeks" /> weeks
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <label for="days" class="sr-only">Days</label>
+            <input class="form-control inline-control date-component" id="days" type="text" v-model="days" /> days
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <label for="hours" class="sr-only">Hours</label>
+            <input class="form-control inline-control date-component" id="hours" type="text" v-model="hours" /> hours
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <label for="minutes" class="sr-only">Minutes</label>
+            <input class="form-control inline-control date-component" id="minutes" type="text" v-model="minutes" /> minutes
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <label for="seconds" class="sr-only">Seconds</label>
+            <input class="form-control inline-control date-component" id="seconds" type="text" v-model="seconds" /> seconds
+          </div>
+        </div>
+      </div>
+      <div class="col-md-5 vcenter">
+        <span class="large-equals">= </span> <span class="date-calc-result" v-text="resultDate">Thu Nov 27 2014 03:41:00</span>
+      </div>
+    </div>
+  </form>
+
   <h2>What is a Unix/Epoch Time?</h2>
   Unix time (a.k.a. POSIX time or Epoch time) is a system for describing instants in time, defined as the number
   of seconds that have elapsed since 00:00:00 Coordinated Universal Time (UTC), Thursday, 1 January 1970, not
