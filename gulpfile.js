@@ -8,7 +8,8 @@ var concat = require('gulp-concat');
 var uglify = require('gulp-uglify');
 var rename = require('gulp-rename');
 var browserify = require('browserify');
-var transform = require('vinyl-transform');
+var source = require('vinyl-source-stream');
+var buffer = require('vinyl-buffer');
 
 // Lint Task
 gulp.task('lint', function() {
@@ -40,12 +41,10 @@ gulp.task('copy-assets', function() {
 })
 
 gulp.task('browserify', function () {
-  var browserified = transform(function(filename) {
-    var b = browserify(filename);
-    return b.bundle();
-  });
-  return gulp.src(['./app/js/index.js'])
-  .pipe(browserified)
+  return browserify({entries:['./app/js/index.js']})
+  .bundle()
+  .pipe(source('index.js'))
+  .pipe(buffer())
   .pipe(uglify())
   .pipe(gulp.dest('./public/js'));
 });
